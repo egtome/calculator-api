@@ -44,10 +44,10 @@ class UserOperationService
     
     public function deleteById(int $id): bool|null
     {
-        $userOperation = UserOperation::where('user_id', Auth::user()->id)
-            ->where('id', $id)
-            ->first();
-        if (!$userOperation) {
+        $user = User::find(Auth::user()->id);
+        $userOperation = USerOperation::find($id);
+
+        if (!$userOperation || ($userOperation->user_id !== $user->id)) {
             return false;
         }
 

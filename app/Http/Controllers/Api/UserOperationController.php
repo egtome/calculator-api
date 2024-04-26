@@ -191,7 +191,7 @@ class UserOperationController extends Controller
             return response()->json([self::DEFAULT_ERROR_PREFIX => 'Invalid ID'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $deleted = $this->userOperationService->deleteById($userOperationId);
+        $deleted = $this->userOperationService->deleteById((int)$userOperationId);
 
         if ($deleted === false) {
             // Invalid ID, or ID does not belong to user

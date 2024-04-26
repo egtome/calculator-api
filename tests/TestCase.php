@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\User;
+use App\Models\UserOperation;
 use Illuminate\Http\Response;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -37,6 +38,15 @@ abstract class TestCase extends BaseTestCase
 
         return $user;
     }
+
+    protected function restoreUSerOperation(int $userOperationId): void
+    {
+        $userOperation = UserOperation::withTrashed()->find($userOperationId);
+        
+        if ($userOperation) {
+            $userOperation->restore();
+        }
+    }    
     
     protected function restoreUserBalance(): User
     {
