@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const INVALIDATE_TOKEN_IF_INACTIVE_IN_MINUTES = 5;
     const DEFAULT_BALANCE = 1500;
     const DEFAULT_ACTIVE_STATUS = true; 
 
@@ -20,8 +21,9 @@ class User extends Authenticatable
         'password',
         'active',
         'balance',
+        'last_activity',
         'created_at',
-        'updated_at',        
+        'updated_at',   
     ];
 
     protected $hidden = [

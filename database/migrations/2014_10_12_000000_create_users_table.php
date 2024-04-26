@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('active')->default(true);
             $table->integer('balance')->unsigned()->default(0);
+            $table->timestamp('last_activity')->nullable();
             $table->timestamps();
         });
     }

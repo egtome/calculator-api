@@ -3,13 +3,12 @@
 use App\Http\Controllers\Api\OperationController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserOperationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('user/register', [UserController::class, 'register']);
 Route::post('user/login', [UserController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'checktokenactivity', 'loguseractivity']], function() {
     Route::post('user/logout', [UserController::class, 'logout']);   
     Route::get('operations', [OperationController::class, 'index']);         
     Route::get('user/operations', [UserOperationController::class, 'index']); 

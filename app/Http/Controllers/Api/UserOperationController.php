@@ -198,6 +198,6 @@ class UserOperationController extends Controller
             return response()->json([self::DEFAULT_ERROR_PREFIX => 'Forbidden'], Response::HTTP_FORBIDDEN);
         }
 
-        return response()->json(['OK'], Response::HTTP_NO_CONTENT);
+        return response()->json([''], Response::HTTP_NO_CONTENT);
     }
 }

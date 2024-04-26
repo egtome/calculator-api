@@ -26,9 +26,18 @@ class UserService
         if ($user === false) {
             return false;
         }
+        
+        // Start tracking user activity, if iddle, token will expire (check app\Http\Middleware\CheckTokenActivity.php)
+        $this->logFirstUserActivity($user);
 
         return $user->createToken('token')->plainTextToken;
-    } 
+    }
+
+    public function logFirstUserActivity(User $user): void
+    {
+        $user->last_activity = now();
+        $user->save();
+    }
 
     public function getAuthenticatedUserByEmailAndPassword(string $email, string $password): User|bool
     {
@@ -41,6 +50,11 @@ class UserService
     
     public function getuserCookie(string $token): HttpFoundationCookie
     {
-        return cookie('cookie_token', $token, 60 * 24);
-    }     
+        return cookie('cookie_token', $token, 30);
+    }
+    
+    public function deleteUserToken(User $user): void
+    {
+        $user->tokens()->delete();        
+    }
 }
