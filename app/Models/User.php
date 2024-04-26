@@ -12,14 +12,23 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const DEFAULT_BALANCE = 1500;
+    const DEFAULT_ACTIVE_STATUS = true; 
+
     protected $fillable = [
         'email',
         'password',
         'active',
         'balance',
+        'created_at',
+        'updated_at',        
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    public function userOperations(){
+        return $this->hasMany(UserOperation::class, 'user_id', 'id');
+    }    
 }

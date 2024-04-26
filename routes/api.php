@@ -1,19 +1,23 @@
 <?php
 
+use App\Http\Controllers\Api\OperationController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserOperationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::post('user/register', [UserController::class, 'register']);
+Route::post('user/login', [UserController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::post('user/logout', [UserController::class, 'logout']);   
+    Route::get('operations', [OperationController::class, 'index']);         
+    Route::get('user/operations', [UserOperationController::class, 'index']); 
+    Route::post('user/operation/addition', [UserOperationController::class, 'postAdditionOperation']);       
+    Route::post('user/operation/substraction', [UserOperationController::class, 'postSubstractionOperation']);       
+    Route::post('user/operation/multiplication', [UserOperationController::class, 'postMultiplicationOperation']);       
+    Route::post('user/operation/division', [UserOperationController::class, 'postDivisionOperation']);       
+    Route::post('user/operation/square-root', [UserOperationController::class, 'postSquareRootOperation']);       
+    Route::post('user/operation/random-string', [UserOperationController::class, 'postRandomStringOperation']);       
+    Route::delete('user/operation/{id}', [UserOperationController::class, 'remove']);
 });
