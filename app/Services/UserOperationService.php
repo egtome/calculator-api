@@ -57,11 +57,11 @@ class UserOperationService
     public function postAdditionOperation(float|int $valueA, float|int $valueB): UserOperation|bool
     {
         $operation = $this->operationService->getById(Operation::OPERATION_ADDITION_ID);
+
         if (!$this->canAffordOperation($operation)) {
             return false;
         }
-        //echo '<pre>';var_dump(Auth::user()->id);die();
-        //echo '<pre>';var_dump($user->balance);die();
+
         $operationResponse = $valueA + $valueB;
 
         return $this->registerOperation(Auth::user(), $operation, $operationResponse);
@@ -131,7 +131,9 @@ class UserOperationService
     }   
 
     public function canAffordOperation(Operation $operation) {
-        return Auth::user()->balance >= $operation->cost;
+        $user = User::find(Auth::user()->id);
+
+        return $user->balance >= $operation->cost;
     }
 
     public function registerOperation(User $user, Operation $operation, float|int|string $operationResponse): UserOperation

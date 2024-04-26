@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -52,7 +53,7 @@ class UserController extends Controller
             return response()->json([self::DEFAULT_ERROR_PREFIX => 'unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
-        return response()->json(['token' => $token], Response::HTTP_OK);
+        return response()->json(['token' => $token, 'user_profile' => Auth::user()->toArray()], Response::HTTP_OK);
     }
     
     public function logout(Request $request) 
