@@ -12,8 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const INVALIDATE_TOKEN_IF_INACTIVE_IN_MINUTES = 60;
-    const DEFAULT_BALANCE = 1500;
+    const INVALIDATE_TOKEN_IF_INACTIVE_IN_MINUTES = 120;
+    const DEFAULT_BALANCE = 10000;
     const DEFAULT_ACTIVE_STATUS = true; 
 
     protected $fillable = [

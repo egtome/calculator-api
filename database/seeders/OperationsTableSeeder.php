@@ -24,7 +24,7 @@ class OperationsTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'type' => 'subtraction',
+                'type' => 'substraction',
                 'cost' => 300,
                 'created_at' => now(),
             ],

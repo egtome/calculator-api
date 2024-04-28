@@ -50,7 +50,7 @@ class UserService
     
     public function getuserCookie(string $token): HttpFoundationCookie
     {
-        return cookie('cookie_token', $token, 30);
+        return cookie('cookie_token', $token, 120);
     }
     
     public function deleteUserToken(User $user): void
