@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 1,
                 'email' => 'user1@test.com',
-                'password' => Hash::make('user1'),
+                'password' => Hash::make(env('USER_PASSWORD_FOR_TESTS')),
                 'balance' => User::DEFAULT_BALANCE,
                 'active' => User::DEFAULT_ACTIVE_STATUS,
                 'created_at' => now(),
@@ -23,11 +23,19 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 2,
                 'email' => 'user2@test.com',
-                'password' => Hash::make('user2'),
-                'balance' => User::DEFAULT_BALANCE,
+                'password' => Hash::make(env('USER_PASSWORD_FOR_TESTS')),
+                'balance' => 5000000,
                 'active' => User::DEFAULT_ACTIVE_STATUS,
                 'created_at' => now(),              
-            ],           
+            ],
+            [
+                'id' => 3,
+                'email' => 'user3@test.com',
+                'password' => Hash::make(env('USER_PASSWORD_FOR_TESTS')),
+                'balance' => 0,
+                'active' => User::DEFAULT_ACTIVE_STATUS,
+                'created_at' => now(),              
+            ],                     
         ];
 
         User::insert($usersData);

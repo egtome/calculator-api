@@ -22,7 +22,7 @@ abstract class TestCase extends BaseTestCase
         $users = User::all()->toArray();
         $response = $this->postJson('api/user/login', [
             'email' => $users[0]['email'],
-            'password' => substr($users[0]['email'], 0, strpos($users[0]['email'], '@')),
+            'password' => env('USER_PASSWORD_FOR_TESTS'),
         ])->assertStatus(Response::HTTP_OK)->json();
         $this->assertNotEmpty($response['token']);
         $this->assertNotEmpty($response['user_profile']);

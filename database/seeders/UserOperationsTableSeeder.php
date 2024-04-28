@@ -46,7 +46,16 @@ class UserOperationsTableSeeder extends Seeder
                 'user_balance' => 1000,
                 'operation_response' => '50',
                 'created_at' => now(),              
-            ],           
+            ],
+            [
+                'id' => 5,
+                'user_id' => 3,
+                'operation_id' => 1,
+                'amount' => 100,
+                'user_balance' => 0,
+                'operation_response' => '50',
+                'created_at' => now(),              
+            ],                      
         ];
 
         UserOperation::insert($userOperationsData);
