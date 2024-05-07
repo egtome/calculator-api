@@ -15,10 +15,10 @@ class UserOperationObserver
      */
     public function created(UserOperation $userOperation)
     {
-        // Deduct balance from user
-        $user = User::find($userOperation->user_id);
-        $user->balance -= $userOperation->amount;
+        // Deduct balance from user, commented for now since this will be done with a TRIGGER in user_operations table
+        //$user = User::find($userOperation->user_id);
+        //$user->balance -= $userOperation->amount;
         
-        $user->save();
+        //$user->save();
     }
 }
